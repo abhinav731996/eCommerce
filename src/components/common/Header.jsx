@@ -1,8 +1,14 @@
 import React from 'react'
-import { Navbar, Nav, Container, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Nav, Container, Badge, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+const logout = () => {
+localStorage.removeItem("login");
+navigate("/auth/login");
+};
   return (
     <div>
       <Navbar bg="light">
@@ -24,6 +30,7 @@ const Header = () => {
           </Nav.Link>
         </Nav>
 
+        <Button onClick={logout}>Logout</Button>
       </Container>
     </Navbar>
     </div>

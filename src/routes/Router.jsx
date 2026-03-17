@@ -2,41 +2,53 @@ import { createBrowserRouter } from "react-router-dom";
 
 import MainLayout from "../layout/MainLayout";
 import AuthLayout from "../layout/AuthLayout";
+import ProtectedRoute from "./ProtectedRoute";
 
 import Home from "../pages/home/Home";
+import Products from "../pages/products/ProductList";
+import ProductDetail from "../pages/products/ProductDetail";
+
+import Cart from "../pages/cart/Cart";
+import Wishlist from "../pages/wishlist/Wishlist";
+import Checkout from "../pages/checkout/Checkout";
+
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
-import ProductList from "../pages/products/ProductList";
-import ProductDetail from "../pages/products/ProductDetail";
-
-
-
-const Router = createBrowserRouter([
+const router = createBrowserRouter([
 
 {
- path: "/",
- element: <MainLayout />,
- children: [
+  path: "/",
+  element: (
+    <ProtectedRoute>
+      <MainLayout />
+    </ProtectedRoute>
+  ),
 
-  { index: true, element: <Home /> },
-  { path: "products", element: <ProductList /> },
-  { path: "products/:id", element: <ProductDetail /> }
+  children: [
+    { index: true, element: <Home /> },
 
- ]
+    { path: "products", element: <Products /> },
+
+    { path: "products/:id", element: <ProductDetail /> },
+
+    { path: "cart", element: <Cart /> },
+
+    { path: "wishlist", element: <Wishlist /> },
+
+    { path: "checkout", element: <Checkout /> }
+  ]
 },
 
 {
- path: "/auth",
- element: <AuthLayout />,
- children: [
-
-  { path: "login", element: <Login /> },
-  { path: "register", element: <Register /> }
-
- ]
+  path: "/auth",
+  element: <AuthLayout />,
+  children: [
+    { path: "login", element: <Login /> },
+    { path: "register", element: <Register /> }
+  ]
 }
 
 ]);
 
-export default Router;
+export default router;

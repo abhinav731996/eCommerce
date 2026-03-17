@@ -1,15 +1,17 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Container, Nav } from "react-bootstrap";
 
 const CategoriesBar = () => {
   return (
     <div>
-      This is categories bar page
+
       <Nav className="bg-dark p-2">
+      <Container className="d-flex justify-content-evenly">
         <Nav.Link className="text-white">Electronics</Nav.Link>
         <Nav.Link className="text-white">Clothing</Nav.Link>
         <Nav.Link className="text-white">Shoes</Nav.Link>
         <Nav.Link className="text-white">Mobiles</Nav.Link>
+      </Container>
       </Nav>
     </div>
   );

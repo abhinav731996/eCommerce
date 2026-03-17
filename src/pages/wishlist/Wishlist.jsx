@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react";
+import ProductCard from "../../components/common/ProductCard";
 
 const Wishlist = () => {
   return (
     <div>
-      This is wishlist page
-    </div>
-  )
-}
+      <h2>Wishlist</h2>
 
-export default Wishlist
+      <div className="row">
+        <div className="col-md-3">
+          <ProductCard />
+        </div>
+
+        <div className="col-md-3">
+          <ProductCard />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Wishlist;

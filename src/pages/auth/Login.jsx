@@ -7,7 +7,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("login", true);
-    navigate("/blog-listing")
+    navigate("/")
     // sessionStorage.setItem("login", true);
     // alert("Submited...")
   }
@@ -79,9 +79,10 @@ const Login = () => {
                     <div className="col-12">
                       <div className="d-grid">
                         <NavLink
-                          to="/rb-home"
+                          to="/"
                           className="btn bsb-btn-xl btn-primary"
                           type="submit"
+                          onClick={handleSubmit}
                         >
                           Login
                         </NavLink>

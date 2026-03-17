@@ -1,22 +1,33 @@
-import React from "react";
 import ProductCard from "../../components/common/ProductCard";
 
-const ProductList = () => {
-  return (
-    <div>
-      This is product listing page
-      <h2>Products</h2>
-      <div className="row">
-        <div className="col-md-3">
-          <ProductCard />
-        </div>
+const products = [1,2,3,4,5,6,7,8];
 
-        <div className="col-md-3">
-          <ProductCard />
-        </div>
-      </div>
-    </div>
-  );
-};
+function ProductList(){
 
-export default ProductList;
+return(
+
+<div>
+
+<h2>ProductList</h2>
+
+<div className="row">
+
+{products.map((p,i)=>(
+
+<div className="col-md-3 mb-3" key={i}>
+
+<ProductCard/>
+
+</div>
+
+))}
+
+</div>
+
+</div>
+
+)
+
+}
+
+export default ProductList
