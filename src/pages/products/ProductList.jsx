@@ -1,4 +1,4 @@
-import ProductCard from "../../components/common/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 const products = [1,2,3,4,5,6,7,8];
 

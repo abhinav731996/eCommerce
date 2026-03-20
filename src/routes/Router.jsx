@@ -14,6 +14,9 @@ import Checkout from "../pages/checkout/Checkout";
 
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
+import MyAccount from "../pages/account/MyAccount";
+import Profile from "../pages/account/Profile";
+import Orders from "../pages/account/Orders";
 
 const router = createBrowserRouter([
 
@@ -26,7 +29,7 @@ const router = createBrowserRouter([
   ),
 
   children: [
-    { index: true, element: <Home /> },
+    { index: "/", element: <Home /> },
 
     { path: "products", element: <Products /> },
 
@@ -36,7 +39,13 @@ const router = createBrowserRouter([
 
     { path: "wishlist", element: <Wishlist /> },
 
-    { path: "checkout", element: <Checkout /> }
+    { path: "checkout", element: <Checkout /> },
+
+    { path: "account", element: <MyAccount /> },
+
+    { path: "profile", element: <Profile /> },
+
+    { path: "orders", element: <Orders /> },
   ]
 },
 

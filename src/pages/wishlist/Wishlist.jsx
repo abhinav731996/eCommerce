@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../../components/common/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 const Wishlist = () => {
   return (

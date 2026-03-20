@@ -1,5 +1,5 @@
 import { Carousel } from "react-bootstrap";
-import ProductCard from "../../components/common/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 import image1 from "../../assets/images/template-1.jpg";
 import image2 from "../../assets/images/template-2.jpg";

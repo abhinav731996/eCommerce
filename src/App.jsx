@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={Router} />;
+      <RouterProvider router={Router} />
     </>
   )
 }
