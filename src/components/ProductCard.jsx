@@ -1,28 +1,51 @@
-import React from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { useContext } from "react";
+import { StoreContext } from "../context/Store";
+import { useNavigate } from "react-router-dom";
 
-const ProductCard = () => {
+function ProductCard({ item }) {
+
+  const { addToCart, toggleWishlist, wishlist } =
+    useContext(StoreContext);
+
+  if (!item) return null;
+
+  const isWishlisted = wishlist.some((p) => p.id === item.id);
+
+  const navigate = useNavigate();
+
   return (
-    <div>
-      
-      <Card>
-      <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QaRqKWxfrGdQ9r5U5mWg-RWItNxzmphX-Q&s" />
+    <div className="card h-100">
 
-      <Card.Body>
+      <img 
+      src={item.thumbnail} 
+      className="card-img-top" 
+      onClick={() => navigate(`/product/${item.id}`)}
+      />
 
-        <Card.Title>Product Name</Card.Title>
+      <div className="card-body">
 
-        <Card.Text>$100</Card.Text>
+        <h6>{item.title}</h6>
+        <p>₹{item.price}</p>
 
-        <Button variant="primary">Add To Cart</Button>
-        <Button variant="outline-danger" className="ms-2">
-          Wishlist
-        </Button>
+        <button
+          className="btn btn-primary w-100 mb-2"
+          onClick={() => addToCart(item)}
+        >
+          Add to Cart
+        </button>
 
-      </Card.Body>
-    </Card>
+        <button
+          className={`btn w-100 ${
+            isWishlisted ? "btn-danger" : "btn-outline-danger"
+          }`}
+          onClick={() => toggleWishlist(item)}
+        >
+          {isWishlisted ? " Wishlisted" : "Not Wishlist"}
+        </button>
+
+      </div>
     </div>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;

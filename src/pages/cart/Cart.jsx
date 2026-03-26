@@ -1,40 +1,57 @@
-import React from 'react'
-import { Table, Button } from "react-bootstrap";
+import { useContext } from "react";
+import { StoreContext } from "../../context/Store";
+import { Button } from "react-bootstrap";
 
-const Cart = () => {
+function Cart() {
+
+  const { cart, removeFromCart, updateQty } =
+    useContext(StoreContext);
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
+    0
+  );
+
   return (
-    <div>
-      <h2>Shopping Cart</h2>
+    <div className="container mt-4">
 
-<Table striped>
+      <h3>Shopping Cart</h3>
 
-<thead>
+      {cart.length === 0 ? (
+        <h5>Your cart is empty</h5>
+      ) : (
+        cart.map((item) => (
+          <div key={item.id} className="border p-3 mb-2">
 
-<tr>
-<th>Product</th>
-<th>Price</th>
-<th>Qty</th>
-<th>Total</th>
-</tr>
+            <h6>{item.title}</h6>
+            <p>₹{item.price}</p>
 
-</thead>
+            <div className="d-flex align-items-center gap-2">
 
-<tbody>
+              <Button onClick={() => updateQty(item.id, "dec")}>-</Button>
 
-<tr>
-<td>Product Name</td>
-<td>$100</td>
-<td>1</td>
-<td>$100</td>
-</tr>
+              <span>{item.qty}</span>
 
-</tbody>
+              <Button onClick={() => updateQty(item.id, "inc")}>+</Button>
 
-</Table>
+            </div>
 
-<Button>Proceed to Checkout</Button>
+            <Button
+              variant="danger"
+              className="mt-2"
+              onClick={() => removeFromCart(item.id)}
+            >
+              Remove
+            </Button>
+
+          </div>
+        ))
+      )}
+
+      <h4 className="mt-3">Total: ₹{total}</h4>
+
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

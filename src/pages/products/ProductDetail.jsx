@@ -1,24 +1,30 @@
-import React from "react";
-import { Button, Form } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const ProductDetail = () => {
+function ProductDetail() {
+
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+
+  useEffect(() => {
+    axios.get(`https://dummyjson.com/products/${id}`)
+      .then((res) => setProduct(res.data));
+  }, [id]);
+
+  if (!product) return <p>Loading...</p>;
+
   return (
-    <div  className="row">
-      This is product details page
-      <div className="col-md-6">
-        <img src="https://via.placeholder.com/400" />
-      </div>
-      <div className="col-md-6">
-        <h3>Product Name</h3>
+    <div className="container mt-4">
 
-        <h4>$100</h4>
+      <img src={product.thumbnail} width="300" />
 
-        <Form.Control type="number" defaultValue={1} />
+      <h3>{product.title}</h3>
+      <p>{product.description}</p>
+      <h4>₹{product.price}</h4>
 
-        <Button className="mt-3">Add To Cart</Button>
-      </div>
     </div>
   );
-};
+}
 
 export default ProductDetail;

@@ -1,22 +1,84 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
-export const StoreContext = createContext(); // export hona chahiye
+export const StoreContext = createContext();
 
 function StoreProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
 
+  //  LocalStorage se load
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+
+  const [wishlist, setWishlist] = useState(
+    JSON.parse(localStorage.getItem("wishlist")) || []
+  );
+
+  //  Save to LocalStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  //  ADD TO CART (Qty logic)
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    const exist = cart.find((item) => item.id === product.id);
+
+    if (exist) {
+      setCart(
+        cart.map((item) =>
+          item.id === product.id
+            ? { ...item, qty: item.qty + 1 }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...product, qty: 1 }]);
+    }
   };
 
-  const addToWishlist = (product) => {
-    setWishlist([...wishlist, product]);
+  //  REMOVE
+  const removeFromCart = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
+
+  //  QTY CONTROL
+  const updateQty = (id, type) => {
+    setCart(
+      cart.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              qty: type === "inc" ? item.qty + 1 : item.qty - 1,
+            }
+          : item
+      )
+    );
+  };
+
+  //  WISHLIST TOGGLE
+  const toggleWishlist = (product) => {
+    const exist = wishlist.find((item) => item.id === product.id);
+
+    if (exist) {
+      setWishlist(wishlist.filter((item) => item.id !== product.id));
+    } else {
+      setWishlist([...wishlist, product]);
+    }
   };
 
   return (
     <StoreContext.Provider
-      value={{ cart, wishlist, addToCart, addToWishlist }}
+      value={{
+        cart,
+        wishlist,
+        addToCart,
+        removeFromCart,
+        updateQty,
+        toggleWishlist,
+      }}
     >
       {children}
     </StoreContext.Provider>
