@@ -9,10 +9,10 @@ import image2 from "../../assets/images/template-2.jpg";
 
 function Home() {
 
-  // ✅ STATE ADD KARO
+  //  STATE ADD KARO
   const [products, setProducts] = useState([]);
 
-  // ✅ API CALL
+  //  API CALL
   useEffect(() => {
     axios.get("https://dummyjson.com/products")
       .then((res) => {

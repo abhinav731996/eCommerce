@@ -94,7 +94,7 @@ const Login = () => {
                 <hr className="mt-5 mb-4 border-secondary-subtle" />
                 <p className="m-0 text-secondary text-center">
                   Create a new account?{" "}
-                  <NavLink to="/Register">Sign up</NavLink>
+                  <NavLink to="/auth/register">Sign up</NavLink>
                 </p>
               </div>
             </div>

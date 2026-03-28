@@ -21,9 +21,10 @@ function Cart() {
         <h5>Your cart is empty</h5>
       ) : (
         cart.map((item) => (
-          <div key={item.id} className="border p-3 mb-2">
+          <div key={item.id} className="border d-flex justify-content-around align-items-center p-3 mb-2">
 
             <h6>{item.title}</h6>
+            <img src={item.thumbnail} width="100" />
             <p>₹{item.price}</p>
 
             <div className="d-flex align-items-center gap-2">

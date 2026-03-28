@@ -68,6 +68,13 @@ function StoreProvider({ children }) {
       setWishlist([...wishlist, product]);
     }
   };
+  
+  // Remove 
+   const removeFromWishlist = (id) => {
+    setWishlist(wishlist.filter((item) => item.id !== id));
+  };
+
+
 
   return (
     <StoreContext.Provider
@@ -78,6 +85,7 @@ function StoreProvider({ children }) {
         removeFromCart,
         updateQty,
         toggleWishlist,
+        removeFromWishlist,
       }}
     >
       {children}
